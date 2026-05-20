@@ -1,0 +1,1387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Tinni 🌌</title>
+    <style>
+        :root {
+            --bg-deep: #0a0a1a;
+            --purple-mid: #2d1b4e;
+            --purple-glow: #8b5cf6;
+            --pink-soft: #e8a0bf;
+            --gold-warm: #f0c27a;
+            --white-soft: #f5f0ff;
+            --glass-bg: rgba(255, 255, 255, 0.04);
+            --glass-border: rgba(255, 255, 255, 0.12);
+            --glass-shadow: rgba(139, 92, 246, 0.15);
+            --text-primary: #f0e6ff;
+            --text-secondary: #c4b5e3;
+            --star-color: #ffffff;
+            --nebula-1: rgba(139, 92, 246, 0.3);
+            --nebula-2: rgba(232, 160, 191, 0.2);
+            --nebula-3: rgba(100, 180, 255, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Georgia', 'Times New Roman', serif;
+            background: var(--bg-deep);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+            cursor: default;
+            position: relative;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            user-select: none;
+            -webkit-user-select: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* ── Canvas Starfield Background ── */
+        #starfieldCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* ── Nebula Glow Overlays ── */
+        .nebula-overlay {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(120px);
+            opacity: 0.5;
+            pointer-events: none;
+            z-index: 0;
+            animation: nebulaPulse 8s ease-in-out infinite;
+        }
+        .nebula-1 {
+            width: 500px;
+            height: 500px;
+            background: var(--nebula-1);
+            top: -15%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+        .nebula-2 {
+            width: 400px;
+            height: 400px;
+            background: var(--nebula-2);
+            bottom: -10%;
+            right: 5%;
+            animation-delay: 3s;
+        }
+        .nebula-3 {
+            width: 350px;
+            height: 350px;
+            background: var(--nebula-3);
+            top: 40%;
+            left: 55%;
+            animation-delay: 5s;
+        }
+
+        @keyframes nebulaPulse {
+            0%,
+            100% {
+                transform: scale(1);
+                opacity: 0.4;
+            }
+            25% {
+                transform: scale(1.25);
+                opacity: 0.65;
+            }
+            50% {
+                transform: scale(0.9);
+                opacity: 0.35;
+            }
+            75% {
+                transform: scale(1.3);
+                opacity: 0.6;
+            }
+        }
+
+        /* ── Floating Hearts ── */
+        .floating-heart {
+            position: fixed;
+            pointer-events: none;
+            z-index: 1;
+            font-size: 1.2rem;
+            opacity: 0;
+            animation: heartFloat 6s ease-in forwards;
+            filter: drop-shadow(0 0 8px rgba(255, 150, 180, 0.6));
+        }
+        @keyframes heartFloat {
+            0% {
+                transform: translateY(0) translateX(0) scale(0.3) rotate(0deg);
+                opacity: 0;
+            }
+            15% {
+                opacity: 0.8;
+                transform: translateY(-40px) translateX(20px) scale(1.1) rotate(10deg);
+            }
+            40% {
+                opacity: 0.7;
+                transform: translateY(-160px) translateX(-30px) scale(0.9) rotate(-8deg);
+            }
+            70% {
+                opacity: 0.35;
+                transform: translateY(-300px) translateX(50px) scale(1.2) rotate(15deg);
+            }
+            100% {
+                transform: translateY(-500px) translateX(-20px) scale(0.2) rotate(-20deg);
+                opacity: 0;
+            }
+        }
+
+        /* ── Main Content Container ── */
+        .main-container {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 20px;
+            gap: 50px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        /* ── Hero Section ── */
+        .hero-section {
+            text-align: center;
+            padding: 60px 20px 30px;
+            position: relative;
+        }
+        .hero-title {
+            font-size: clamp(2.2rem, 6vw, 4rem);
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            background: linear-gradient(135deg, #f5f0ff 0%, #d4bfff 30%, #f0c27a 60%, #e8a0bf 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: titleGlow 3s ease-in-out infinite;
+            text-shadow: none;
+            filter: drop-shadow(0 0 25px rgba(180, 140, 255, 0.5));
+            margin-bottom: 20px;
+        }
+        @keyframes titleGlow {
+            0%,
+            100% {
+                filter: drop-shadow(0 0 25px rgba(180, 140, 255, 0.5));
+            }
+            50% {
+                filter: drop-shadow(0 0 50px rgba(220, 170, 255, 0.85));
+            }
+        }
+        .hero-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            font-style: italic;
+            letter-spacing: 0.03em;
+            animation: fadeInUp 2s ease-out;
+            max-width: 500px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(25px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ── Rotating Messages ── */
+        .rotating-messages {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 40px;
+            padding: 16px 32px;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            box-shadow: 0 8px 32px var(--glass-shadow);
+            text-align: center;
+            min-height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.6s ease;
+            max-width: 90vw;
+        }
+        .rotating-messages span {
+            font-size: 1rem;
+            color: #e8d5ff;
+            letter-spacing: 0.02em;
+            animation: messageFade 0.8s ease;
+        }
+        @keyframes messageFade {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ── Constellation Trigger ── */
+        .constellation-area {
+            position: relative;
+            width: 200px;
+            height: 180px;
+            cursor: pointer;
+            z-index: 5;
+            margin: 10px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .constellation-dot {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: #fff;
+            border-radius: 50%;
+            box-shadow: 0 0 14px 3px rgba(200, 180, 255, 0.8);
+            transition: all 0.4s ease;
+        }
+        .constellation-area:hover .constellation-dot {
+            box-shadow: 0 0 28px 8px rgba(240, 200, 255, 1);
+            width: 12px;
+            height: 12px;
+        }
+        .constellation-line {
+            position: absolute;
+            height: 1.5px;
+            background: rgba(255, 255, 255, 0.25);
+            transform-origin: left center;
+            pointer-events: none;
+            transition: all 0.4s ease;
+        }
+        .constellation-area:hover .constellation-line {
+            background: rgba(255, 255, 255, 0.6);
+            box-shadow: 0 0 10px rgba(200, 170, 255, 0.5);
+        }
+        .surprise-btn {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 14px 28px;
+            border-radius: 50px;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            background: rgba(139, 92, 246, 0.35);
+            color: #fff;
+            font-size: 1rem;
+            cursor: pointer;
+            letter-spacing: 0.05em;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            transition: all 0.5s ease;
+            z-index: 10;
+            white-space: nowrap;
+            animation: btnPulse 1.5s ease-in-out infinite;
+        }
+        .surprise-btn.visible {
+            display: block;
+        }
+        @keyframes btnPulse {
+            0%,
+            100% {
+                box-shadow: 0 0 20px rgba(180, 130, 255, 0.5);
+            }
+            50% {
+                box-shadow: 0 0 45px rgba(200, 150, 255, 0.9), 0 0 80px rgba(180, 130, 255, 0.4);
+            }
+        }
+        .surprise-btn:hover {
+            background: rgba(139, 92, 246, 0.6);
+            border-color: #fff;
+            box-shadow: 0 0 60px rgba(200, 150, 255, 1);
+            transform: translate(-50%, -50%) scale(1.08);
+        }
+
+        /* ── Section Titles ── */
+        .section-title {
+            font-size: 1.6rem;
+            letter-spacing: 0.05em;
+            color: #e0d0ff;
+            text-align: center;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        /* ── Glass Card ── */
+        .glass-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 28px 24px;
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            box-shadow: 0 8px 32px var(--glass-shadow);
+            width: 100%;
+            max-width: 600px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .glass-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 16px 48px rgba(139, 92, 246, 0.25);
+        }
+
+        /* ── Star Collection Game ── */
+        .hidden-star {
+            position: fixed;
+            z-index: 3;
+            cursor: pointer;
+            font-size: 1.5rem;
+            animation: starTwinkle 2s ease-in-out infinite;
+            transition: transform 0.3s ease;
+            pointer-events: auto;
+            filter: drop-shadow(0 0 10px rgba(255, 220, 150, 0.7));
+        }
+        .hidden-star:hover {
+            transform: scale(1.6);
+            filter: drop-shadow(0 0 22px rgba(255, 220, 100, 1));
+        }
+        .hidden-star.collected {
+            opacity: 0.3;
+            pointer-events: none;
+            filter: drop-shadow(0 0 4px rgba(150, 150, 150, 0.3));
+            animation: none;
+        }
+        @keyframes starTwinkle {
+            0%,
+            100% {
+                opacity: 0.7;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.3);
+            }
+        }
+        .star-collection-toast {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(40, 20, 60, 0.9);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 30px;
+            padding: 12px 24px;
+            color: #f0e0ff;
+            z-index: 20;
+            font-size: 0.95rem;
+            letter-spacing: 0.03em;
+            animation: toastIn 3s ease forwards;
+            pointer-events: none;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+        @keyframes toastIn {
+            0% {
+                opacity: 0;
+                transform: translateX(-50%) translateY(-30px);
+            }
+            15% {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
+            }
+            75% {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
+            }
+            100% {
+                opacity: 0;
+                transform: translateX(-50%) translateY(-20px);
+            }
+        }
+        .star-counter {
+            text-align: center;
+            color: #c4b5e3;
+            font-size: 0.9rem;
+            letter-spacing: 0.04em;
+            margin-top: 8px;
+        }
+
+        /* ── Envelope ── */
+        .envelope-icon {
+            font-size: 3rem;
+            cursor: pointer;
+            animation: envelopeFloat 3s ease-in-out infinite;
+            transition: transform 0.3s ease;
+            filter: drop-shadow(0 0 18px rgba(200, 170, 240, 0.5));
+            z-index: 5;
+            position: relative;
+            display: inline-block;
+        }
+        .envelope-icon:hover {
+            transform: scale(1.2);
+            filter: drop-shadow(0 0 30px rgba(220, 180, 255, 0.8));
+        }
+        @keyframes envelopeFloat {
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-14px);
+            }
+        }
+        .letter-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 30;
+            background: rgba(5, 5, 20, 0.85);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            justify-content: center;
+            align-items: center;
+        }
+        .letter-modal.open {
+            display: flex;
+        }
+        .letter-paper {
+            background: linear-gradient(180deg, #1a1030 0%, #1e1438 40%, #1a1030 100%);
+            border: 2px solid rgba(200, 170, 240, 0.4);
+            border-radius: 20px;
+            padding: 35px 30px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(100, 60, 180, 0.4);
+            position: relative;
+            animation: letterAppear 0.7s ease-out;
+        }
+        @keyframes letterAppear {
+            from {
+                opacity: 0;
+                transform: scale(0.8) rotateX(20deg);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) rotateX(0);
+            }
+        }
+        .letter-line {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            font-style: italic;
+            color: #e8d5ff;
+            font-size: 1.05rem;
+            line-height: 2;
+            opacity: 0;
+            animation: lineReveal 0.7s ease forwards;
+            letter-spacing: 0.03em;
+        }
+        @keyframes lineReveal {
+            from {
+                opacity: 0;
+                transform: translateY(12px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .letter-close {
+            position: absolute;
+            top: 12px;
+            right: 18px;
+            background: none;
+            border: none;
+            color: #c4b5e3;
+            font-size: 1.6rem;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        .letter-close:hover {
+            color: #fff;
+        }
+
+        /* ── Countdown ── */
+        .countdown-container {
+            display: flex;
+            gap: 18px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .countdown-unit {
+            text-align: center;
+            min-width: 60px;
+        }
+        .countdown-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(180deg, #f5f0ff 0%, #d4bfff 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 18px rgba(180, 140, 255, 0.7));
+            animation: numberGlow 2s ease-in-out infinite;
+        }
+        @keyframes numberGlow {
+            0%,
+            100% {
+                filter: drop-shadow(0 0 18px rgba(180, 140, 255, 0.7));
+            }
+            50% {
+                filter: drop-shadow(0 0 35px rgba(210, 170, 255, 1));
+            }
+        }
+        .countdown-label {
+            font-size: 0.7rem;
+            color: #a090c0;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+        }
+
+        /* ── Confetti ── */
+        .confetti-piece {
+            position: fixed;
+            z-index: 25;
+            pointer-events: none;
+            animation: confettiFall linear forwards;
+        }
+        @keyframes confettiFall {
+            0% {
+                transform: translateY(-60px) rotate(0deg) scale(1);
+                opacity: 1;
+            }
+            30% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(105vh) rotate(720deg) scale(0.3);
+                opacity: 0;
+            }
+        }
+
+        /* ── Screen Shake ── */
+        .screen-shake {
+            animation: shake 0.5s ease-out;
+        }
+        @keyframes shake {
+            0%,
+            100% {
+                transform: translate(0, 0);
+            }
+            10% {
+                transform: translate(-6px, 4px);
+            }
+            20% {
+                transform: translate(7px, -3px);
+            }
+            30% {
+                transform: translate(-5px, -6px);
+            }
+            40% {
+                transform: translate(4px, 5px);
+            }
+            50% {
+                transform: translate(-3px, -4px);
+            }
+            60% {
+                transform: translate(5px, 2px);
+            }
+            70% {
+                transform: translate(-4px, 3px);
+            }
+            80% {
+                transform: translate(2px, -2px);
+            }
+            90% {
+                transform: translate(-2px, 1px);
+            }
+        }
+
+        /* ── Star Alignment Overlay ── */
+        .alignment-overlay {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 22;
+            pointer-events: none;
+            font-size: clamp(1.5rem, 4vw, 3rem);
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            color: #fff;
+            text-align: center;
+            opacity: 0;
+            transition: opacity 0.6s ease;
+            filter: drop-shadow(0 0 30px rgba(255, 220, 150, 1));
+            white-space: nowrap;
+        }
+        .alignment-overlay.show {
+            opacity: 1;
+        }
+
+        /* ── Final Floating Text ── */
+        .final-floating-text {
+            position: fixed;
+            top: 40%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 23;
+            pointer-events: none;
+            font-size: 1.2rem;
+            color: #f0e0ff;
+            text-align: center;
+            opacity: 0;
+            transition: opacity 1s ease;
+            letter-spacing: 0.04em;
+            font-style: italic;
+            filter: drop-shadow(0 0 20px rgba(200, 170, 240, 0.8));
+            max-width: 90vw;
+        }
+        .final-floating-text.show {
+            opacity: 1;
+        }
+
+        /* ── Easter Egg Toast ── */
+        .easter-egg-toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(30, 15, 50, 0.9);
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            border-radius: 30px;
+            padding: 10px 22px;
+            color: #f0d0ff;
+            z-index: 20;
+            font-size: 0.85rem;
+            letter-spacing: 0.03em;
+            animation: toastIn 3.5s ease forwards;
+            pointer-events: none;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        /* ── Responsive ── */
+        @media (max-width: 600px) {
+            .hero-title {
+                font-size: 1.8rem;
+            }
+            .hero-subtitle {
+                font-size: 0.9rem;
+            }
+            .countdown-number {
+                font-size: 1.8rem;
+            }
+            .letter-paper {
+                padding: 22px 16px;
+            }
+            .letter-line {
+                font-size: 0.9rem;
+                line-height: 1.8;
+            }
+            .rotating-messages {
+                padding: 12px 20px;
+                border-radius: 30px;
+            }
+            .rotating-messages span {
+                font-size: 0.85rem;
+            }
+            .glass-card {
+                padding: 18px 14px;
+                border-radius: 16px;
+            }
+            .section-title {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ── Nebula Glow Overlays ── -->
+    <div class="nebula-overlay nebula-1"></div>
+    <div class="nebula-overlay nebula-2"></div>
+    <div class="nebula-overlay nebula-3"></div>
+
+    <!-- ── Starfield Canvas ── -->
+    <canvas id="starfieldCanvas"></canvas>
+
+    <!-- ── Star Alignment Overlay ── -->
+    <div class="alignment-overlay" id="alignmentOverlay">HAPPY BIRTHDAY<br>TINNI ✨</div>
+
+    <!-- ── Final Floating Text ── -->
+    <div class="final-floating-text" id="finalFloatingText">
+        "Okay fine…<br>maybe today the universe revolves around you."
+    </div>
+
+    <!-- ── Letter Modal ── -->
+    <div class="letter-modal" id="letterModal">
+        <div class="letter-paper" id="letterPaper">
+            <button class="letter-close" id="letterClose">&times;</button>
+            <div id="letterContent"></div>
+        </div>
+    </div>
+
+    <!-- ═══════════════ MAIN CONTENT ═══════════════ -->
+    <div class="main-container" id="mainContainer">
+
+        <!-- ── Hero ── -->
+        <section class="hero-section">
+            <h1 class="hero-title">HAPPY BIRTHDAY TINNI ✨</h1>
+            <p class="hero-subtitle">
+                "Some people deserve ordinary birthday wishes.<br>You deserved a tiny universe instead."
+            </p>
+        </section>
+
+        <!-- ── Rotating Messages ── -->
+        <div class="rotating-messages" id="rotatingMessages">
+            <span id="rotatingMsgText">You make chaos look aesthetic.</span>
+        </div>
+
+        <!-- ── Constellation Trigger ── -->
+        <div class="constellation-area" id="constellationArea" title="Hover here...">
+            <div class="constellation-dot" style="top:20px;left:30px;"></div>
+            <div class="constellation-dot" style="top:55px;left:90px;"></div>
+            <div class="constellation-dot" style="top:100px;left:50px;"></div>
+            <div class="constellation-dot" style="top:75px;left:140px;"></div>
+            <div class="constellation-dot" style="top:130px;left:120px;"></div>
+            <button class="surprise-btn" id="surpriseBtn">✨ Surprise Me ✨</button>
+        </div>
+        <p style="font-size:0.75rem;color:#a090c0;text-align:center;margin-top:-20px;">hover near the constellation...</p>
+
+        <!-- ── Find The Stars Game ── -->
+        <div class="glass-card" style="text-align:center;">
+            <div class="section-title">⭐ Find the Hidden Stars</div>
+            <p style="color:#b0a0c8;font-size:0.85rem;margin-bottom:8px;">Click glowing stars scattered across the galaxy</p>
+            <div class="star-counter">Stars found: <strong id="starCount">0</strong> / <strong id="starTotal">6</strong></div>
+            <p id="finalNoteUnlock" style="display:none;color:#f0c27a;font-style:italic;margin-top:10px;letter-spacing:0.03em;">
+                🌟 All stars collected! A special note has been unlocked...
+            </p>
+        </div>
+
+        <!-- ── Envelope ── -->
+        <div style="text-align:center;">
+            <div class="envelope-icon" id="envelopeIcon" title="Open me...">💌</div>
+            <p style="font-size:0.75rem;color:#a090c0;">A little note for you</p>
+        </div>
+
+        <!-- ── Countdown ── -->
+        <div class="glass-card" style="text-align:center;">
+            <div class="section-title">🎂 Countdown to March 26th</div>
+            <div class="countdown-container" id="countdownContainer">
+                <div class="countdown-unit"><div class="countdown-number" id="cdDays">365</div><div class="countdown-label">Days</div></div>
+                <div class="countdown-unit"><div class="countdown-number" id="cdHours">0</div><div class="countdown-label">Hours</div></div>
+                <div class="countdown-unit"><div class="countdown-number" id="cdMins">0</div><div class="countdown-label">Minutes</div></div>
+                <div class="countdown-unit"><div class="countdown-number" id="cdSecs">0</div><div class="countdown-label">Seconds</div></div>
+            </div>
+        </div>
+
+        <!-- ── Hidden Easter Egg Zones ── -->
+        <div style="text-align:center;padding:10px;">
+            <span style="color:#3a2a55;font-size:0.7rem;cursor:default;" id="easterEgg1" title="?">·</span>
+            &nbsp;&nbsp;&nbsp;
+            <span style="color:#3a2a55;font-size:0.7rem;cursor:default;" id="easterEgg2" title="?">·</span>
+            &nbsp;&nbsp;&nbsp;
+            <span style="color:#3a2a55;font-size:0.7rem;cursor:default;" id="easterEgg3" title="?">·</span>
+        </div>
+        <p style="font-size:0.6rem;color:#3a2a55;text-align:center;margin-top:-5px;">tiny secrets hidden around...</p>
+
+    </div><!-- /main-container -->
+
+    <!-- ═══════════════ SCRIPTS ═══════════════ -->
+    <script>
+        (function() {
+            // ───────────────────────────────────
+            // STARFIELD CANVAS
+            // ───────────────────────────────────
+            const canvas = document.getElementById('starfieldCanvas');
+            const ctx = canvas.getContext('2d');
+            let stars = [];
+            let shootingStars = [];
+            const STAR_COUNT = 280;
+
+            function resizeCanvas() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+            resizeCanvas();
+            window.addEventListener('resize', () => {
+                resizeCanvas();
+                initStars();
+            });
+
+            function initStars() {
+                stars = [];
+                for (let i = 0; i < STAR_COUNT; i++) {
+                    stars.push({
+                        x: Math.random() * canvas.width,
+                        y: Math.random() * canvas.height,
+                        r: Math.random() * 2.2 + 0.5,
+                        twinkleSpeed: Math.random() * 0.02 + 0.005,
+                        twinkleOffset: Math.random() * Math.PI * 2,
+                        baseOpacity: Math.random() * 0.6 + 0.4,
+                        hue: Math.random() < 0.3 ? 260 + Math.random() * 40 : (Math.random() < 0.15 ? 30 +
+                            Math.random() * 30 : 0),
+                        sat: Math.random() < 0.3 ? '70%' : '0%',
+                    });
+                }
+            }
+            initStars();
+
+            function spawnShootingStar() {
+                if (Math.random() < 0.003 && shootingStars.length < 3) {
+                    shootingStars.push({
+                        x: Math.random() * canvas.width * 0.8,
+                        y: Math.random() * canvas.height * 0.4,
+                        vx: 4 + Math.random() * 7,
+                        vy: 1.5 + Math.random() * 4,
+                        life: 1,
+                        decay: 0.008 + Math.random() * 0.025,
+                        trail: [],
+                    });
+                }
+            }
+
+            function drawStars(timestamp) {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                // Draw nebula subtle glows on canvas
+                const ng1 = ctx.createRadialGradient(canvas.width * 0.2, canvas.height * 0.2, 0, canvas.width * 0.2,
+                    canvas.height * 0.2, 350);
+                ng1.addColorStop(0, 'rgba(139,92,246,0.08)');
+                ng1.addColorStop(1, 'transparent');
+                ctx.fillStyle = ng1;
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+                const ng2 = ctx.createRadialGradient(canvas.width * 0.75, canvas.height * 0.7, 0, canvas.width * 0.75,
+                    canvas.height * 0.7, 300);
+                ng2.addColorStop(0, 'rgba(232,160,191,0.06)');
+                ng2.addColorStop(1, 'transparent');
+                ctx.fillStyle = ng2;
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+                // Stars
+                for (const s of stars) {
+                    const twinkle = Math.sin(timestamp * s.twinkleSpeed + s.twinkleOffset) * 0.35 + 0.65;
+                    const alpha = s.baseOpacity * twinkle;
+                    const hsl = s.hue > 0 ? `hsla(${s.hue},${s.sat},90%,${alpha})` : `rgba(255,255,255,${alpha})`;
+                    ctx.beginPath();
+                    ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+                    ctx.fillStyle = hsl;
+                    ctx.fill();
+                    if (s.r > 1.5 && twinkle > 0.85) {
+                        ctx.beginPath();
+                        ctx.arc(s.x, s.y, s.r * 2.5, 0, Math.PI * 2);
+                        ctx.fillStyle = `rgba(200,170,255,${alpha*0.25})`;
+                        ctx.fill();
+                    }
+                }
+
+                // Shooting stars
+                for (let i = shootingStars.length - 1; i >= 0; i--) {
+                    const ss = shootingStars[i];
+                    ss.trail.push({ x: ss.x, y: ss.y, life: ss.life });
+                    if (ss.trail.length > 40) ss.trail.shift();
+                    ss.x += ss.vx;
+                    ss.y += ss.vy;
+                    ss.life -= ss.decay;
+                    if (ss.life <= 0 || ss.x > canvas.width + 50 || ss.y > canvas.height + 50) {
+                        shootingStars.splice(i, 1);
+                        continue;
+                    }
+                    // Draw trail
+                    for (let j = 0; j < ss.trail.length; j++) {
+                        const t = ss.trail[j];
+                        const alpha = (j / ss.trail.length) * ss.life * 0.7;
+                        ctx.beginPath();
+                        ctx.arc(t.x, t.y, 1.2, 0, Math.PI * 2);
+                        ctx.fillStyle = `rgba(255,255,255,${alpha})`;
+                        ctx.fill();
+                    }
+                    ctx.beginPath();
+                    ctx.arc(ss.x, ss.y, 2, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(255,255,255,${ss.life})`;
+                    ctx.fill();
+                    ctx.beginPath();
+                    ctx.arc(ss.x, ss.y, 8, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(200,180,255,${ss.life*0.4})`;
+                    ctx.fill();
+                }
+            }
+
+            let animFrame;
+            function animate(timestamp) {
+                spawnShootingStar();
+                drawStars(timestamp);
+                animFrame = requestAnimationFrame(animate);
+            }
+            animFrame = requestAnimationFrame(animate);
+
+            // ───────────────────────────────────
+            // FLOATING HEARTS
+            // ───────────────────────────────────
+            function spawnHeart() {
+                const heart = document.createElement('div');
+                heart.className = 'floating-heart';
+                heart.textContent = ['💜', '✨', '💫', '🌸', '💖', '🩷'][Math.floor(Math.random() * 6)];
+                heart.style.left = Math.random() * 90 + '%';
+                heart.style.bottom = '-30px';
+                heart.style.animationDuration = (5 + Math.random() * 7) + 's';
+                heart.style.fontSize = (0.8 + Math.random() * 1.8) + 'rem';
+                document.body.appendChild(heart);
+                heart.addEventListener('animationend', () => heart.remove());
+            }
+            setInterval(() => {
+                if (Math.random() < 0.5) spawnHeart();
+            }, 2500);
+            spawnHeart();
+            spawnHeart();
+
+            // ───────────────────────────────────
+            // ROTATING MESSAGES
+            // ───────────────────────────────────
+            const messages = [
+                'You make chaos look aesthetic.',
+                'Certified main character energy.',
+                'Today the stars are showing off.',
+                'Illegal amount of birthday glow.',
+                'The universe called. It said happy birthday.',
+                'Somebody here has dangerous levels of charm.',
+                'Birthday privilege: activated.',
+                'The moon is jealous of your glow tonight.',
+            ];
+            let msgIndex = 0;
+            const msgSpan = document.getElementById('rotatingMsgText');
+
+            function rotateMessage() {
+                msgSpan.style.opacity = '0';
+                msgSpan.style.transform = 'translateY(10px)';
+                setTimeout(() => {
+                    msgIndex = (msgIndex + 1) % messages.length;
+                    msgSpan.textContent = messages[msgIndex];
+                    msgSpan.style.opacity = '1';
+                    msgSpan.style.transform = 'translateY(0)';
+                }, 400);
+            }
+            setInterval(rotateMessage, 3800);
+
+            // ───────────────────────────────────
+            // CONSTELLATION & SURPRISE BUTTON
+            // ───────────────────────────────────
+            const constellationArea = document.getElementById('constellationArea');
+            const surpriseBtn = document.getElementById('surpriseBtn');
+            const alignmentOverlay = document.getElementById('alignmentOverlay');
+            const finalFloatingText = document.getElementById('finalFloatingText');
+            const mainContainer = document.getElementById('mainContainer');
+            let surpriseTriggered = false;
+
+            constellationArea.addEventListener('mouseenter', () => {
+                if (!surpriseTriggered) {
+                    surpriseBtn.classList.add('visible');
+                }
+            });
+            constellationArea.addEventListener('mouseleave', (e) => {
+                if (!surpriseTriggered && !surpriseBtn.contains(e.relatedTarget)) {
+                    setTimeout(() => {
+                        if (!surpriseBtn.matches(':hover') && !constellationArea.matches(':hover')) {
+                            surpriseBtn.classList.remove('visible');
+                        }
+                    }, 300);
+                }
+            });
+            surpriseBtn.addEventListener('mouseenter', () => {
+                if (!surpriseTriggered) surpriseBtn.classList.add('visible');
+            });
+            surpriseBtn.addEventListener('mouseleave', () => {
+                if (!surpriseTriggered && !constellationArea.matches(':hover')) {
+                    surpriseBtn.classList.remove('visible');
+                }
+            });
+            // Touch support
+            constellationArea.addEventListener('touchstart', (e) => {
+                if (!surpriseTriggered) {
+                    e.preventDefault();
+                    surpriseBtn.classList.add('visible');
+                    setTimeout(() => surpriseBtn.click(), 200);
+                }
+            });
+
+            surpriseBtn.addEventListener('click', () => {
+                if (surpriseTriggered) return;
+                surpriseTriggered = true;
+                triggerSurpriseSequence();
+            });
+
+            function triggerSurpriseSequence() {
+                surpriseBtn.classList.remove('visible');
+                surpriseBtn.style.display = 'none';
+
+                // 1. Screen shake
+                document.body.classList.add('screen-shake');
+                setTimeout(() => document.body.classList.remove('screen-shake'), 500);
+
+                // 2. Star alignment text
+                alignmentOverlay.classList.add('show');
+                setTimeout(() => alignmentOverlay.classList.remove('show'), 2800);
+
+                // 3. Fireworks on canvas
+                triggerFireworks();
+
+                // 4. Confetti
+                spawnConfetti();
+
+                // 5. Brighten background briefly
+                document.body.style.transition = 'filter 1.5s ease';
+                document.body.style.filter = 'brightness(1.4)';
+                setTimeout(() => {
+                    document.body.style.filter = 'brightness(1)';
+                    setTimeout(() => { document.body.style.transition = ''; }, 1500);
+                }, 1800);
+
+                // 6. Final floating text
+                setTimeout(() => {
+                    finalFloatingText.classList.add('show');
+                    setTimeout(() => finalFloatingText.classList.remove('show'), 5000);
+                }, 2500);
+            }
+
+            // ───────────────────────────────────
+            // FIREWORKS (Canvas particles)
+            // ───────────────────────────────────
+            let fireworksParticles = [];
+
+            function triggerFireworks() {
+                const cx = canvas.width / 2;
+                const cy = canvas.height / 2;
+                const colors = ['#f0c27a', '#e8a0bf', '#b490f0', '#ffd700', '#ff9ecf', '#a0d2ff', '#ffffff',
+                '#ffb3c6'];
+                for (let burst = 0; burst < 6; burst++) {
+                    const bx = cx + (Math.random() - 0.5) * 400;
+                    const by = cy + (Math.random() - 0.5) * 300;
+                    const color = colors[Math.floor(Math.random() * colors.length)];
+                    const count = 50 + Math.floor(Math.random() * 70);
+                    for (let i = 0; i < count; i++) {
+                        const angle = Math.random() * Math.PI * 2;
+                        const speed = 2 + Math.random() * 8;
+                        fireworksParticles.push({
+                            x: bx,
+                            y: by,
+                            vx: Math.cos(angle) * speed,
+                            vy: Math.sin(angle) * speed,
+                            life: 1,
+                            decay: 0.008 + Math.random() * 0.03,
+                            color: color,
+                            size: 1.5 + Math.random() * 3,
+                        });
+                    }
+                }
+                if (!fireworksAnimating) {
+                    fireworksAnimating = true;
+                    animateFireworks();
+                }
+            }
+
+            let fireworksAnimating = false;
+
+            function animateFireworks() {
+                if (fireworksParticles.length === 0) {
+                    fireworksAnimating = false;
+                    return;
+                }
+                for (let i = fireworksParticles.length - 1; i >= 0; i--) {
+                    const p = fireworksParticles[i];
+                    p.x += p.vx;
+                    p.y += p.vy;
+                    p.vy += 0.04;
+                    p.life -= p.decay;
+                    if (p.life <= 0) fireworksParticles.splice(i, 1);
+                }
+                if (fireworksParticles.length > 0) {
+                    requestAnimationFrame(animateFireworks);
+                } else {
+                    fireworksAnimating = false;
+                }
+            }
+
+            // Override drawStars to include fireworks
+            const origDrawStars = drawStars;
+            drawStars = function(timestamp) {
+                origDrawStars(timestamp);
+                for (const p of fireworksParticles) {
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                    // Simple color handling
+                    let col = p.color;
+                    if (col.startsWith('#')) {
+                        ctx.fillStyle = col + Math.floor(p.life * 255).toString(16).padStart(2, '0');
+                    } else {
+                        ctx.fillStyle = col.replace(')', `,${p.life})`).replace('rgb', 'rgba');
+                    }
+                    ctx.fill();
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.size * 3, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(200,170,255,${p.life*0.3})`;
+                    ctx.fill();
+                }
+            };
+
+            // ───────────────────────────────────
+            // CONFETTI
+            // ───────────────────────────────────
+            function spawnConfetti() {
+                const colors = ['#f0c27a', '#e8a0bf', '#b490f0', '#ffd700', '#ff9ecf', '#a0d2ff', '#c4b5e3',
+                    '#ffb3c6', '#ffffff'
+                ];
+                for (let i = 0; i < 120; i++) {
+                    const piece = document.createElement('div');
+                    piece.className = 'confetti-piece';
+                    piece.style.left = Math.random() * 100 + '%';
+                    piece.style.top = -(Math.random() * 40) + 'px';
+                    piece.style.width = (6 + Math.random() * 10) + 'px';
+                    piece.style.height = (6 + Math.random() * 14) + 'px';
+                    piece.style.background = colors[Math.floor(Math.random() * colors.length)];
+                    piece.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+                    piece.style.animationDuration = (2.5 + Math.random() * 4) + 's';
+                    piece.style.animationDelay = Math.random() * 1.5 + 's';
+                    document.body.appendChild(piece);
+                    piece.addEventListener('animationend', () => piece.remove());
+                }
+            }
+
+            // ───────────────────────────────────
+            // HIDDEN STARS GAME
+            // ───────────────────────────────────
+            const starMessages = [
+                'You laugh like good weather. 🌤️',
+                'This website has too much glitter now. ✨',
+                'Somebody here has dangerous levels of charm. 😏',
+                'You unlocked cosmic favoritism. 🌌',
+                'Your birthday luck stat increased. 📈',
+                'The stars are literally showing off for you. ⭐',
+            ];
+            let collectedStars = 0;
+            const totalStars = 6;
+            const starCountEl = document.getElementById('starCount');
+            const starTotalEl = document.getElementById('starTotal');
+            const finalNoteUnlock = document.getElementById('finalNoteUnlock');
+            starTotalEl.textContent = totalStars;
+            const hiddenStarEls = [];
+
+            const starPositions = [
+                { top: '8%', left: '12%' },
+                { top: '18%', left: '78%' },
+                { top: '55%', left: '6%' },
+                { top: '70%', left: '88%' },
+                { top: '35%', left: '92%' },
+                { top: '82%', left: '22%' },
+            ];
+
+            for (let i = 0; i < totalStars; i++) {
+                const starEl = document.createElement('div');
+                starEl.className = 'hidden-star';
+                starEl.textContent = '⭐';
+                starEl.style.top = starPositions[i].top;
+                starEl.style.left = starPositions[i].left;
+                starEl.style.animationDelay = (i * 0.4) + 's';
+                starEl.dataset.index = i;
+                starEl.title = 'Click me!';
+                document.body.appendChild(starEl);
+                hiddenStarEls.push(starEl);
+
+                starEl.addEventListener('click', (e) => {
+                    if (starEl.classList.contains('collected')) return;
+                    starEl.classList.add('collected');
+                    collectedStars++;
+                    starCountEl.textContent = collectedStars;
+                    showToast(starMessages[i]);
+                    if (collectedStars >= totalStars) {
+                        finalNoteUnlock.style.display = 'block';
+                        finalNoteUnlock.style.animation = 'fadeInUp 1s ease-out';
+                        setTimeout(() => {
+                            openLetter();
+                        }, 2000);
+                    }
+                });
+            }
+
+            function showToast(msg) {
+                const toast = document.createElement('div');
+                toast.className = 'star-collection-toast';
+                toast.textContent = msg;
+                document.body.appendChild(toast);
+                toast.addEventListener('animationend', () => toast.remove());
+            }
+
+            // ───────────────────────────────────
+            // ENVELOPE / LETTER
+            // ───────────────────────────────────
+            const envelopeIcon = document.getElementById('envelopeIcon');
+            const letterModal = document.getElementById('letterModal');
+            const letterClose = document.getElementById('letterClose');
+            const letterContent = document.getElementById('letterContent');
+            let letterOpened = false;
+
+            const letterLines = [
+                "I wasn't going to make something dramatic.",
+                "Then somehow this happened.",
+                "",
+                "Anyway…",
+                "I hope this year gives you moments",
+                "that feel as nice as your smile looks.",
+                "",
+                "Happy Birthday, Tinni 🌌",
+            ];
+
+            function openLetter() {
+                if (letterOpened) return;
+                letterOpened = true;
+                letterModal.classList.add('open');
+                letterContent.innerHTML = '';
+                letterLines.forEach((line, i) => {
+                    const p = document.createElement('p');
+                    p.className = 'letter-line';
+                    p.textContent = line || '\u00A0';
+                    p.style.animationDelay = (i * 0.55) + 's';
+                    letterContent.appendChild(p);
+                });
+            }
+
+            envelopeIcon.addEventListener('click', openLetter);
+            letterClose.addEventListener('click', () => {
+                letterModal.classList.remove('open');
+                letterOpened = false;
+            });
+            letterModal.addEventListener('click', (e) => {
+                if (e.target === letterModal) {
+                    letterModal.classList.remove('open');
+                    letterOpened = false;
+                }
+            });
+
+            // ───────────────────────────────────
+            // COUNTDOWN TO MARCH 26TH
+            // ───────────────────────────────────
+            const cdDays = document.getElementById('cdDays');
+            const cdHours = document.getElementById('cdHours');
+            const cdMins = document.getElementById('cdMins');
+            const cdSecs = document.getElementById('cdSecs');
+
+            function getNextMarch26() {
+                const now = new Date();
+                const year = now.getFullYear();
+                let target = new Date(year, 2, 26, 0, 0, 0); // month 2 = March
+                if (now > target) {
+                    target = new Date(year + 1, 2, 26, 0, 0, 0);
+                }
+                return target;
+            }
+
+            function updateCountdown() {
+                const now = new Date();
+                const target = getNextMarch26();
+                let diff = target - now;
+                if (diff <= 0) {
+                    cdDays.textContent = '0';
+                    cdHours.textContent = '0';
+                    cdMins.textContent = '0';
+                    cdSecs.textContent = '0';
+                    spawnConfetti();
+                    return;
+                }
+                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                diff -= days * 1000 * 60 * 60 * 24;
+                const hours = Math.floor(diff / (1000 * 60 * 60));
+                diff -= hours * 1000 * 60 * 60;
+                const mins = Math.floor(diff / (1000 * 60));
+                diff -= mins * 1000 * 60;
+                const secs = Math.floor(diff / 1000);
+                cdDays.textContent = days;
+                cdHours.textContent = hours;
+                cdMins.textContent = mins;
+                cdSecs.textContent = secs;
+            }
+            updateCountdown();
+            setInterval(updateCountdown, 1000);
+
+            // ───────────────────────────────────
+            // EASTER EGGS
+            // ───────────────────────────────────
+            const easterEggMessages = [
+                'You found a rare birthday artifact. 🏺✨',
+                'Achievement unlocked: Professional Star Finder. 🌟',
+                'The moon approved this website. 🌙✅',
+                'Secret cosmic transmission received. 📡',
+                'You just earned +100 aura points. 💎',
+                'Hidden constellation: Tinni Major. 🌌',
+            ];
+
+            function triggerEasterEgg(msg) {
+                const toast = document.createElement('div');
+                toast.className = 'easter-egg-toast';
+                toast.textContent = msg;
+                document.body.appendChild(toast);
+                toast.addEventListener('animationend', () => toast.remove());
+            }
+
+            document.getElementById('easterEgg1').addEventListener('click', (e) => {
+                e.stopPropagation();
+                triggerEasterEgg(easterEggMessages[Math.floor(Math.random() * easterEggMessages.length)]);
+            });
+            document.getElementById('easterEgg2').addEventListener('click', (e) => {
+                e.stopPropagation();
+                triggerEasterEgg(easterEggMessages[Math.floor(Math.random() * easterEggMessages.length)]);
+            });
+            document.getElementById('easterEgg3').addEventListener('click', (e) => {
+                e.stopPropagation();
+                triggerEasterEgg(easterEggMessages[Math.floor(Math.random() * easterEggMessages.length)]);
+            });
+
+            let clickCount = 0;
+            document.addEventListener('click', (e) => {
+                if (e.target.closest('.hidden-star') || e.target.closest('.constellation-area') ||
+                    e.target.closest('.surprise-btn') || e.target.closest('.envelope-icon') ||
+                    e.target.closest('.letter-modal') || e.target.closest('#easterEgg1') ||
+                    e.target.closest('#easterEgg2') || e.target.closest('#easterEgg3')) {
+                    return;
+                }
+                clickCount++;
+                if (clickCount === 7) {
+                    triggerEasterEgg('✨ You discovered the secret rhythm of the cosmos. ✨');
+                    clickCount = 0;
+                }
+            });
+
+            console.log('%c🌌 Soft Galaxy Birthday Surprise %cfor Tinni %c✨',
+                'color:#d4bfff;font-size:1.2em;',
+                'color:#f0c27a;font-size:1.2em;',
+                'color:#e8a0bf;');
+            console.log('%c✨ All systems ready. Stars aligned. Universe standing by.',
+                'color:#c4b5e3;font-style:italic;');
+            console.log('%c💡 Tips: Find 6 hidden stars ⭐ | Hover near the constellation | Click tiny dots at the bottom',
+                'color:#a090c0;font-size:0.85em;');
+        })();
+    </script>
+</body>
+</html>
