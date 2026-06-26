@@ -1279,51 +1279,63 @@
                     letterOpened = false;
                 }
             });
+// ───────────────────────────────────
+// COUNTDOWN TO JUNE 26TH
+// ───────────────────────────────────
+const cdDays = document.getElementById('cdDays');
+const cdHours = document.getElementById('cdHours');
+const cdMins = document.getElementById('cdMins');
+const cdSecs = document.getElementById('cdSecs');
 
-            // ───────────────────────────────────
-            // COUNTDOWN TO MARCH 26TH
-            // ───────────────────────────────────
-            const cdDays = document.getElementById('cdDays');
-            const cdHours = document.getElementById('cdHours');
-            const cdMins = document.getElementById('cdMins');
-            const cdSecs = document.getElementById('cdSecs');
+function getNextJune26() {
+    const now = new Date();
+    const year = now.getFullYear();
 
-            function getNextMarch26() {
-                const now = new Date();
-                const year = now.getFullYear();
-                let target = new Date(year, 2, 26, 0, 0, 0); // month 2 = March
-                if (now > target) {
-                    target = new Date(year + 1, 2, 26, 0, 0, 0);
-                }
-                return target;
-            }
+    // month 5 = June (months are 0-indexed)
+    let target = new Date(year, 5, 26, 0, 0, 0);
 
-            function updateCountdown() {
-                const now = new Date();
-                const target = getNextMarch26();
-                let diff = target - now;
-                if (diff <= 0) {
-                    cdDays.textContent = '0';
-                    cdHours.textContent = '0';
-                    cdMins.textContent = '0';
-                    cdSecs.textContent = '0';
-                    spawnConfetti();
-                    return;
-                }
-                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-                diff -= days * 1000 * 60 * 60 * 24;
-                const hours = Math.floor(diff / (1000 * 60 * 60));
-                diff -= hours * 1000 * 60 * 60;
-                const mins = Math.floor(diff / (1000 * 60));
-                diff -= mins * 1000 * 60;
-                const secs = Math.floor(diff / 1000);
-                cdDays.textContent = days;
-                cdHours.textContent = hours;
-                cdMins.textContent = mins;
-                cdSecs.textContent = secs;
-            }
-            updateCountdown();
-            setInterval(updateCountdown, 1000);
+    // If June 26 has already passed this year,
+    // count down to next year's June 26.
+    if (now > target) {
+        target = new Date(year + 1, 5, 26, 0, 0, 0);
+    }
+
+    return target;
+}
+
+function updateCountdown() {
+    const now = new Date();
+    const target = getNextJune26();
+    let diff = target - now;
+
+    if (diff <= 0) {
+        cdDays.textContent = '0';
+        cdHours.textContent = '0';
+        cdMins.textContent = '0';
+        cdSecs.textContent = '0';
+        spawnConfetti();
+        return;
+    }
+
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    diff -= days * 1000 * 60 * 60 * 24;
+
+    const hours = Math.floor(diff / (1000 * 60 * 60));
+    diff -= hours * 1000 * 60 * 60;
+
+    const mins = Math.floor(diff / (1000 * 60));
+    diff -= mins * 1000 * 60;
+
+    const secs = Math.floor(diff / 1000);
+
+    cdDays.textContent = days;
+    cdHours.textContent = hours;
+    cdMins.textContent = mins;
+    cdSecs.textContent = secs;
+}
+
+updateCountdown();
+setInterval(updateCountdown, 1000);
 
             // ───────────────────────────────────
             // EASTER EGGS
