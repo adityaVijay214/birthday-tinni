@@ -775,7 +775,7 @@ body.entered #dock{transform:translateX(-50%) translateY(0)}
 
   <!-- ── Countdown ── -->
   <div class="glass-card" style="text-align:center;" id="secCount">
-    <div class="section-title">🎂 Countdown to June 26th</div>
+    <div class="section-title">🎂 Countdown to March 26th</div>
     <div class="countdown-container" id="countdownContainer">
       <div class="countdown-unit"><div class="countdown-number" id="cdDays">0</div><div class="countdown-label">Days</div></div>
       <div class="countdown-unit"><div class="countdown-number" id="cdHours">0</div><div class="countdown-label">Hours</div></div>
@@ -1479,21 +1479,22 @@ $('#letterClose').addEventListener('click', () => letterModal.classList.remove('
 letterModal.addEventListener('click', e => { if(e.target === letterModal) letterModal.classList.remove('open'); });
 
 /* ═══════════════════════════════════════════════
-   13. COUNTDOWN
+   13. COUNTDOWN — MARCH 26TH
    ═══════════════════════════════════════════════ */
 const cdDays = $('#cdDays'), cdHours = $('#cdHours'), cdMins = $('#cdMins'), cdSecs = $('#cdSecs');
 let birthdayCelebrated = false;
 
-function getNextJune26(){
+function getNextMarch26(){
   const now = new Date();
   const y = now.getFullYear();
-  let target = new Date(y, 5, 26, 0, 0, 0);
-  if(now > target) target = new Date(y+1, 5, 26, 0, 0, 0);
+  // month 2 = March (months are 0-indexed)
+  let target = new Date(y, 2, 26, 0, 0, 0);
+  if(now > target) target = new Date(y+1, 2, 26, 0, 0, 0);
   return target;
 }
 function updateCountdown(){
   const now = new Date();
-  const target = getNextJune26();
+  const target = getNextMarch26();
   let diff = target - now;
   if(diff <= 0){
     cdDays.textContent = cdHours.textContent = cdMins.textContent = cdSecs.textContent = '0';
@@ -1508,11 +1509,11 @@ function updateCountdown(){
   cdMins.textContent  = String(m).padStart(2,'0');
   cdSecs.textContent  = String(s).padStart(2,'0');
 
-  // Celebrate if it's June 26 today
-  const isBirthday = now.getMonth() === 5 && now.getDate() === 26;
+  // Celebrate if it's March 26 today
+  const isBirthday = now.getMonth() === 2 && now.getDate() === 26;
   if(isBirthday && !birthdayCelebrated){
     birthdayCelebrated = true;
-    setTimeout(()=>{ spawnConfetti(160); Sound.success(); toast('🎉 It\'s June 26th — HAPPY BIRTHDAY SINJINI! 🎂'); }, 500);
+    setTimeout(()=>{ spawnConfetti(160); Sound.success(); toast('🎉 It\'s March 26th — HAPPY BIRTHDAY SINJINI! 🎂'); }, 500);
   }
 }
 updateCountdown();
